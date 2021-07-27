@@ -29,10 +29,12 @@ public class OFPacketFeatRes extends OFPacketBase {
                     + (((long) raw[offset++] & 0xFF) << 8) + ((long) raw[offset++] & 0xFF);
             this.n_buffers = (((long) raw[offset++] & 0xFF) << 24) + (((long) raw[offset++] & 0xFF) << 16)
                     + (((long) raw[offset++] & 0xFF) << 8) + ((long) raw[offset++] & 0xFF);
-            this.n_tbls = (short) ((int) raw[offset++] & 0xFF);
+            this.n_tbls = (short) ((short) raw[offset++] & 0xFF);
             offset = offset + 3; // padding of 3 bytes
-            this.capabilities = (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
-            this.actions = (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
+            this.capabilities = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
+                    + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
+            this.actions = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
+                    + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
 
             int portCount = (this.length - MIN_SIZE) / OFPort.SIZE;
             if (portCount > 0) {
