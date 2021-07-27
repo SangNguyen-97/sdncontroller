@@ -43,4 +43,23 @@ public class OFPacketBase {
 
         return ret;
     }
+
+    public String toString() {
+        String s = "";
+        s = s + "version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
+                + this.xid;
+        return s;
+    }
+
+    public boolean equals(OFPacketBase p) {
+        if (p.version != this.version)
+            return false;
+        else if (p.type != this.type)
+            return false;
+        else if (p.length != this.length)
+            return false;
+        else if (p.xid != this.xid)
+            return false;
+        return true;
+    }
 }
