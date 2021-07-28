@@ -3,6 +3,8 @@ package de.frankfurtuniversity.protocol.mac;
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class MACAddress {
+    public static int SIZE = 6; // in bytes
+
     byte[] mac = new byte[6];
 
     public MACAddress(byte[] raw) throws RawBytesTooFewException {
@@ -37,7 +39,7 @@ public class MACAddress {
         }
     }
 
-    public byte[] getAddress(){
+    public byte[] getAddress() {
         return mac;
     }
 }

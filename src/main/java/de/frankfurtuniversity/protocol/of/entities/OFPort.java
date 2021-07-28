@@ -16,9 +16,43 @@ public class OFPort {
         int state; // 32 bits;
         int curr; // 32 bits
         int advertised; // 32 bits
+        int supported; // 32 bits
+        int peer; // 32 bits
 
-        public int getPortId(){
+        public int getPortId() {
                 return this.portId;
+        }
+
+        public MACAddress getHWAddr() {
+                return this.hw_addr;
+        }
+
+        public String getName() {
+                return this.name;
+        }
+
+        public int getConfig() {
+                return this.config;
+        }
+
+        public int getState() {
+                return this.state;
+        }
+
+        public int getCurr() {
+                return this.curr;
+        }
+
+        public int getAdvertised() {
+                return this.advertised;
+        }
+
+        public int getSupported() {
+                return this.supported;
+        }
+
+        public int getPeer() {
+                return this.peer;
         }
 
         public OFPort(byte[] raw) throws RawBytesTooFewException {
@@ -27,13 +61,11 @@ public class OFPort {
                 else {
                         int offset = 0;
                         this.portId = (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
-                        this.hw_addr = new MACAddress(Arrays.copyOfRange(raw, offset, 6));
+                        this.hw_addr = new MACAddress(Arrays.copyOfRange(raw, offset, offset + 6));
                         offset = offset + 6;
-                        this.name = new String(Arrays.copyOfRange(raw, offset, offset + 16), StandardCharsets.US_ASCII);
+                        this.name = new String(Arrays.copyOfRange(raw, offset, offset + 16), StandardCharsets.US_ASCII)
+                                        .replace("\u0000", " ").trim();
                         offset = offset + 16;
-                        this.config = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
-                                        + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
-
                         this.config = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
                                         + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
                         this.state = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
@@ -41,6 +73,10 @@ public class OFPort {
                         this.curr = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
                                         + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
                         this.advertised = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
+                                        + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
+                        this.supported = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
+                                        + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
+                        this.peer = (((int) raw[offset++] & 0xFF) << 24) + (((int) raw[offset++] & 0xFF) << 16)
                                         + (((int) raw[offset++] & 0xFF) << 8) + ((int) raw[offset++] & 0xFF);
                 }
         }

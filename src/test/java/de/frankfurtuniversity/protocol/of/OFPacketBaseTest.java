@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
+
 public class OFPacketBaseTest {
     @Test
-    public void testConstructor(){
+    public void testConstructorRaw() throws RawBytesTooFewException{
 
         byte[] raw = {
             (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x08, // version + type
@@ -21,4 +23,9 @@ public class OFPacketBaseTest {
         assertEquals((long) 1234567, p.xid);
     }
     
+    @Test
+    public void testConstructor(){
+        OFPacketBase p = new OFPacketBase((short)1,(short)0,8,1234567L);
+        System.out.println(p.toString());
+    }
 }

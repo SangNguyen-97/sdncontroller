@@ -1,4 +1,4 @@
-package de.frankfurtuniversity.utils;
+package de.frankfurtuniversity.protocol.of;
 
 import java.nio.ByteBuffer;
 
@@ -6,7 +6,7 @@ import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class Utility {
     /**
-     * Return long value of this 8-bytes array (big-endian)
+     * Return long value of this 8-bytes sub-array from "offset" (big-endian)
      * 
      * @param raw Byte array respresenting the value to be returned in long in
      *            big-endian order
@@ -14,17 +14,17 @@ public class Utility {
      * @throws RawBytesTooFewException when input array is less than 8 bytes (size
      *                                 of long in bytes)
      */
-    public static long bytesToLong(byte[] raw) throws RawBytesTooFewException {
+    public static long bytesToLong(byte[] raw, int offset) throws RawBytesTooFewException {
         if (raw.length < Long.BYTES)
             throw new RawBytesTooFewException();
         ByteBuffer b = ByteBuffer.allocate(Long.BYTES);
-        b.put(raw, 0, 8);
+        b.put(raw, offset, Long.BYTES);
         b.flip();
         return b.getLong();
     }
 
     /**
-     * Return integer value of this 8-bytes array (big-endian)
+     * Return integer value of 8-bytes sub-array from "offset" (big-endian)
      * 
      * @param raw Byte array respresenting the value to be returned in integer in
      *            big-endian order
@@ -32,13 +32,31 @@ public class Utility {
      * @throws RawBytesTooFewException when input array is less than 8 bytes (size
      *                                 of integer in bytes)
      */
-    public static int bytesToInt(byte[] raw) throws RawBytesTooFewException {
+    public static int bytesToInt(byte[] raw, int offset) throws RawBytesTooFewException {
         if (raw.length < Integer.BYTES)
             throw new RawBytesTooFewException();
         ByteBuffer b = ByteBuffer.allocate(Integer.BYTES);
-        b.put(raw, 0, 4);
+        b.put(raw, offset, Integer.BYTES);
         b.flip();
         return b.getInt();
+    }
+
+    /**
+     * Return short value of 8-bytes sub-array from "offset" (big-endian)
+     * 
+     * @param raw Byte array respresenting the value to be returned in short in
+     *            big-endian order
+     * @return short value representation of the given byte array
+     * @throws RawBytesTooFewException when input array is less than 8 bytes (size
+     *                                 of short in bytes)
+     */
+    public static short bytesToShort(byte[] raw, int offset) throws RawBytesTooFewException {
+        if (raw.length < Short.BYTES)
+            throw new RawBytesTooFewException();
+        ByteBuffer b = ByteBuffer.allocate(Short.BYTES);
+        b.put(raw, offset, Short.BYTES);
+        b.flip();
+        return b.getShort();
     }
 
     /**
