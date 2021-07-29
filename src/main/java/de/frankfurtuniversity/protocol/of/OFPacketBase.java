@@ -45,10 +45,24 @@ public class OFPacketBase {
     }
 
     public String toString() {
-        String s = "";
-        s = s + "version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
-                + this.xid;
-        return s;
+        return "version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
+        + this.xid;
+    }
+
+    public short getVersion(){
+        return this.version;
+    }
+
+    public short getType(){
+        return this.type;
+    }
+
+    public int getLength(){
+        return this.length;
+    }
+
+    public long getXid(){
+        return this.xid;
     }
 
     public boolean equals(OFPacketBase p) {

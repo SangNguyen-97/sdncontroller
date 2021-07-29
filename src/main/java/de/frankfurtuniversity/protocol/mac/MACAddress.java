@@ -1,11 +1,27 @@
 package de.frankfurtuniversity.protocol.mac;
 
+import java.nio.ByteBuffer;
+
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class MACAddress {
     public static int SIZE = 6; // in bytes
 
     byte[] mac = new byte[6];
+
+    public MACAddress(String s) throws NumberFormatException {
+        String[] sa = s.split(":");
+        if (sa.length >= 6) {
+            ByteBuffer buff = ByteBuffer.allocate(SIZE);
+            for (int i = 0; i < SIZE; i++) {
+                if (sa[i].length() > 2)
+                    throw new NumberFormatException();
+                buff.put((byte) (Integer.parseInt(sa[i], 16)));
+            }
+            buff.flip();
+            this.mac = buff.array();
+        }
+    }
 
     public MACAddress(byte[] raw) throws RawBytesTooFewException {
         if (raw.length == 6) {
@@ -39,7 +55,7 @@ public class MACAddress {
         }
     }
 
-    public byte[] getAddress() {
+    public byte[] getAddressBytes() {
         return mac;
     }
 }

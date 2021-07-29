@@ -1,31 +1,37 @@
 package de.frankfurtuniversity.protocol.of;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
 
 import org.junit.Test;
 
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class OFPacketBaseTest {
-    @Test
-    public void testConstructorRaw() throws RawBytesTooFewException{
-
-        byte[] raw = {
-            (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x08, // version + type
+    byte[] raw = { (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x08, // version + type
             (byte) 0x00, (byte) 0x12, (byte) 0xd6, (byte) 0x87 // length + xid
-        };
-        
-        OFPacketBase p = new OFPacketBase(raw);
-        System.out.println(p.toString());
-        assertEquals("Checking version",(short) 1, p.version);
-        assertEquals((short) 0, p.type);
-        assertEquals((int) 8, p.length);
-        assertEquals((long) 1234567, p.xid);
-    }
-    
+    };
+    short version = 1;
+    short type = 0;
+    int length = 8;
+    long xid = 1234567L;
+
     @Test
-    public void testConstructor(){
-        OFPacketBase p = new OFPacketBase((short)1,(short)0,8,1234567L);
-        System.out.println(p.toString());
+    public void testConstructorRaw() throws RawBytesTooFewException {
+        OFPacketBase p = new OFPacketBase(raw);
+
+        assertEquals("version", version, p.getVersion());
+        assertEquals("type", type, p.getType());
+        assertEquals("length", length, p.getLength());
+        assertEquals("xid", xid, p.getXid());
+    }
+
+    @Test
+    public void testToHeader() {
+        OFPacketBase p = new OFPacketBase(version, type, length, xid);
+
+        assertTrue("to header", Arrays.equals(raw, p.toHeader()));
     }
 }
