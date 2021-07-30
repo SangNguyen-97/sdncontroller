@@ -8,8 +8,18 @@ import de.frankfurtuniversity.protocol.mac.MACAddress;
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class OFPort {
+        public static final int SIZE = 48; // in bytes
 
-        public static int SIZE = 48; // in bytes
+        public static final int PORTID_MAX = 0xff00;
+        public static final int PORTID_INPORT = 0xfff8;
+        public static final int PORTID_TABLE = 0xfff9;
+        public static final int PORTID_NORMAL = 0xfffa;
+        public static final int PORTID_FLOOD = 0xfffb;
+        public static final int PORTID_ALL = 0xfffc;
+        public static final int PORTID_CONTROLLER = 0xfffd;
+        public static final int PORTID_LOCAL = 0xfffe;
+        public static final int PORTID_NONE = 0xffff;
+
 
         int portId; // 16 bits
         MACAddress hw_addr; // 6 * 8 bits
@@ -139,4 +149,5 @@ public class OFPort {
         public int getPeer() {
                 return this.peer;
         }
+
 }

@@ -19,7 +19,7 @@ import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 public class Action {
     public static final int PAYLOAD_OUTPUT = 0x00;
     public static final int PAYLOAD_SETVLANVID = 0x01;
-    public static final int PAYLOAD_VLANPCP = 0x02;
+    public static final int PAYLOAD_SETVLANPCP = 0x02;
     public static final int PAYLOAD_STRIPVLAN = 0x03;
     public static final int PAYLOAD_SETDLSRC = 0x04;
     public static final int PAYLOAD_SETDLDST = 0x05;
@@ -58,7 +58,7 @@ public class Action {
                 case PAYLOAD_SETVLANVID:
                     this.p = new ActionSetVLANVID(Arrays.copyOfRange(raw, offset, offset + ActionSetVLANVID.SIZE));
                     break;
-                case PAYLOAD_VLANPCP:
+                case PAYLOAD_SETVLANPCP:
                     this.p = new ActionSetVLANPCP(Arrays.copyOfRange(raw, offset, offset + ActionSetVLANPCP.SIZE));
                     break;
                 case PAYLOAD_STRIPVLAN:

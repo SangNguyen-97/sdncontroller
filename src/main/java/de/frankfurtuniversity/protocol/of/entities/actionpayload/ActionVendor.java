@@ -31,7 +31,7 @@ public class ActionVendor extends ActionPayload {
     }
 
     public String toString(){
-        return "setVendor vendor: " + this.vendor;
+        return "setVendor vendor: " + (int)this.vendor;
     }
 
     public long getVendor(){

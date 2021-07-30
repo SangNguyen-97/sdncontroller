@@ -17,12 +17,12 @@ public class OFPacketFeatRes extends OFPacketBase {
     int actions; // 32 bits
     HashMap<Integer, OFPort> ports; // N * 48 * 8 bits
 
-    public OFPacketFeatRes(byte[] raw) throws RawBytesTooFewException {
-        super(raw);
-        if (raw.length < MIN_SIZE) {
+    public OFPacketFeatRes(OFPacketBase s, byte[] raw) throws RawBytesTooFewException {
+        super(s.getVersion(), s.getType(), s.getLength(), s.getXid());
+        if (raw.length < (MIN_SIZE - OFPacketBase.SIZE)) {
             throw new RawBytesTooFewException();
         } else {
-            int offset = OFPacketBase.SIZE;
+            int offset = 0;
             this.datapath_id = (((long) raw[offset++] & 0xFF) << 56) + (((long) raw[offset++] & 0xFF) << 48)
                     + (((long) raw[offset++] & 0xFF) << 40) + (((long) raw[offset++] & 0xFF) << 32)
                     + (((long) raw[offset++] & 0xFF) << 24) + (((long) raw[offset++] & 0xFF) << 16)
@@ -46,6 +46,33 @@ public class OFPacketFeatRes extends OFPacketBase {
                 }
             }
         }
+    }
+
+    public long getDatapathId() {
+        return this.datapath_id;
+    }
+
+    public long getNBuffers() {
+        return this.n_buffers;
+    }
+
+    public short getNTbls() {
+        return this.n_tbls;
+    }
+
+    public int getCapabilities() {
+        return this.capabilities;
+    }
+
+    public int getActions() {
+        return this.actions;
+    }
+
+    /**
+     * NOTE: the returned value is a reference so be careful when modifying this returned object
+     */
+    public HashMap<Integer, OFPort> getPorts() {
+        return ports;
     }
 
 }

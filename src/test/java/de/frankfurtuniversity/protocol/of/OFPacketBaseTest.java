@@ -10,13 +10,14 @@ import org.junit.Test;
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class OFPacketBaseTest {
-    byte[] raw = { (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x08, // version + type
-            (byte) 0x00, (byte) 0x12, (byte) 0xd6, (byte) 0x87 // length + xid
+    byte[] raw = { 
+        (byte) 0x01, (byte) 0x00, (byte) 0x00, (byte) 0x08, // version + type + length
+        (byte) 0x00, (byte) 0x12, (byte) 0xd6, (byte) 0x87 // xid
     };
-    short version = 1;
+    short version = OFPacketBase.VERSION;
     short type = 0;
     int length = 8;
-    long xid = 1234567L;
+    long xid = 0x0012d687L;
 
     @Test
     public void testConstructorRaw() throws RawBytesTooFewException {

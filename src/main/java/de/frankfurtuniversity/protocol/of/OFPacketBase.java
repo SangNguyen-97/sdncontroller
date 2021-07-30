@@ -5,7 +5,21 @@ import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 public class OFPacketBase {
     public static final int SIZE = 8; // in bytes
 
-    short version; // 8 bits
+    public static final short VERSION = 1;
+
+    public static final short OFPACKETTYPE_HELLO = 0;
+    public static final short OFPACKETTYPE_ERROR = 1;
+    public static final short OFPACKETTYPE_ECHO_REQ = 2;
+    public static final short OFPACKETTYPE_ECHO_RES = 3;
+    public static final short OFPACKETTYPE_FEATURE_REQ = 5;
+    public static final short OFPACKETTYPE_FEATURE_RES = 6;
+    public static final short OFPACKETTYPE_PACKET_IN = 10;
+    public static final short OFPACKETTYPE_FLOW_RMD = 11;
+    public static final short OFPACKETTYPE_PORT_STATUS = 12;
+    public static final short OFPACKETTYPE_PACKET_OUT = 13;
+    public static final short OFPACKETTYPE_FLOW_MOD = 14;
+
+    short version = VERSION; // 8 bits
     short type; // 8 bits
     int length; // 16 bits
     long xid; // 32 bits
@@ -22,6 +36,7 @@ public class OFPacketBase {
         }
     }
 
+    // Needed for initiation of subclasses
     public OFPacketBase(short version, short type, int length, long xid) {
         this.version = version;
         this.type = type;
@@ -32,36 +47,36 @@ public class OFPacketBase {
     public byte[] toHeader() {
         byte[] ret = new byte[SIZE];
 
-        ret[0] = (byte) (version & 0xFF);
-        ret[1] = (byte) (type & 0xFF);
-        ret[2] = (byte) ((length >> 8) & 0xFF);
-        ret[3] = (byte) (length & 0xFF);
-        ret[4] = (byte) ((xid >> 24) & 0xFF);
-        ret[5] = (byte) ((xid >> 16) & 0xFF);
-        ret[6] = (byte) ((xid >> 8) & 0xFF);
-        ret[7] = (byte) (xid & 0xFF);
+        ret[0] = (byte) version;
+        ret[1] = (byte) type;
+        ret[2] = (byte) (length >> 8);
+        ret[3] = (byte) length;
+        ret[4] = (byte) (xid >> 24);
+        ret[5] = (byte) (xid >> 16);
+        ret[6] = (byte) (xid >> 8);
+        ret[7] = (byte) xid;
 
         return ret;
     }
 
     public String toString() {
-        return "version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
-        + this.xid;
+        return "OFPacketBase version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
+                + this.xid;
     }
 
-    public short getVersion(){
+    public short getVersion() {
         return this.version;
     }
 
-    public short getType(){
+    public short getType() {
         return this.type;
     }
 
-    public int getLength(){
+    public int getLength() {
         return this.length;
     }
 
-    public long getXid(){
+    public long getXid() {
         return this.xid;
     }
 

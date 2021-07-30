@@ -23,12 +23,12 @@ public class MyRunnable implements Runnable {
         }
     }
 
-    public static SDNSwitch handshake() {
+    // public static SDNSwitch handshake() {
         
-    }
+    // }
 
     public void run() {
-        handshake();
+        // handshake();
     }
 
 }
