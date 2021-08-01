@@ -150,4 +150,17 @@ public class OFPort {
                 return this.peer;
         }
 
+        public boolean equals(OFPort np){
+                if (this.portId != np.portId) return false;
+                else if (!this.hw_addr.equals(np.hw_addr)) return false;
+                else if (!this.name.equals(np.name)) return false;
+                else if (this.config != np.config) return false;
+                else if (this.state != np.state) return false;
+                else if (this.curr != np.curr) return false;
+                else if (this.advertised != np.advertised) return false;
+                else if (this.supported != np.supported) return false;
+                else if (this.peer != np.peer) return false;
+
+                return true;
+        }
 }

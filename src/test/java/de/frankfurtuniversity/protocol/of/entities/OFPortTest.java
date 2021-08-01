@@ -56,4 +56,5 @@ public class OFPortTest {
 
         assertTrue("to header", Arrays.equals(raw, p.toHeader()));
     }
+
 }

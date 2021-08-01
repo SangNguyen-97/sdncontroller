@@ -10,7 +10,7 @@ import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class Match {
 
-    public static int SIZE = 40; // in bytes
+    public static final int SIZE = 40; // in bytes
 
     long wildcards; // 32 bits
     int in_port; // 16 bits

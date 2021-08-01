@@ -6,7 +6,7 @@ import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class OFPacketHello extends OFPacketBase {
 
-    public static int SIZE = OFPacketBase.SIZE + 0; // in bytes
+    public static final int SIZE = OFPacketBase.SIZE + 0; // in bytes
 
     public OFPacketHello(OFPacketBase s) throws RawBytesTooFewException {
         super(s.getVersion(),s.getType(),s.getLength(),s.getXid());

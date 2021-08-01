@@ -60,8 +60,8 @@ public class OFPacketBase {
     }
 
     public String toString() {
-        return "OFPacketBase version: " + this.version + "   type: " + this.type + "   length: " + this.length + "   xid: "
-                + this.xid;
+        return "OFPacketBase version: " + this.version + "   type: " + this.type + "   length: " + this.length
+                + "   xid: " + this.xid;
     }
 
     public short getVersion() {

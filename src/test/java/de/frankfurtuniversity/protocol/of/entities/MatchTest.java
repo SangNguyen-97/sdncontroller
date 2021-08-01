@@ -13,7 +13,8 @@ import org.junit.Test;
 import de.frankfurtuniversity.protocol.mac.MACAddress;
 
 public class MatchTest {
-    byte[] raw = { (byte) 0x00, (byte) 0x0b, (byte) 0x9b, (byte) 0xf2, // wildcards
+    byte[] raw = { 
+            (byte) 0x00, (byte) 0x0b, (byte) 0x9b, (byte) 0xf2, // wildcards
             (byte) 0x00, (byte) 0x0c, (byte) 0x11, (byte) 0x22, // in_port + dl_src
             (byte) 0x33, (byte) 0x44, (byte) 0x55, (byte) 0x66, // dl_src
             (byte) 0x77, (byte) 0x77, (byte) 0x88, (byte) 0x99, // dl_dst

@@ -114,7 +114,7 @@ public class OFPacketFeatResTest {
         assertEquals("capabilities", capabilities, p.capabilities);
         assertEquals("actions", actions, p.actions);
 
-        OFPort port = p.getPorts().get(6636);
+        OFPort port = p.getPorts().get(port_id_1);
 
         assertEquals("port_id",port_id_1, port.getPortId());
         assertTrue("hw_addr",hw_addr_1.equals(port.getHWAddr()));
@@ -126,7 +126,7 @@ public class OFPacketFeatResTest {
         assertEquals("supported",supported_1, port.getSupported());
         assertEquals("peer",peer_1, port.getPeer());
 
-        OFPort port2 = p.getPorts().get(0xabcd);
+        OFPort port2 = p.getPorts().get(port_id_2);
 
         assertEquals("port_id",port_id_2, port2.getPortId());
         assertTrue("hw_addr",hw_addr_2.equals(port2.getHWAddr()));

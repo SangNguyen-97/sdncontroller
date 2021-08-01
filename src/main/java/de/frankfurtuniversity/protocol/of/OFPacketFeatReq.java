@@ -5,7 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import de.frankfurtuniversity.utils.exception.RawBytesTooFewException;
 
 public class OFPacketFeatReq extends OFPacketBase {
-    public static int SIZE = OFPacketBase.SIZE + 0; // in bytes
+    public static final int SIZE = OFPacketBase.SIZE + 0; // in bytes
 
     public OFPacketFeatReq(OFPacketBase s) throws RawBytesTooFewException {
         super(s.getVersion(),s.getType(),s.getLength(),s.getXid());
